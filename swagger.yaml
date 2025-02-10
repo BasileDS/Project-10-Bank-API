@@ -18,6 +18,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -36,6 +37,11 @@ paths:
       summary: Obtenir les détails d'une transaction spécifique
       operationId: getTransactionDetails
       parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
         - name: transactionId
           in: path
           required: true
@@ -46,15 +52,22 @@ paths:
         200:
           description: Détails d'une transaction spécifique
         400:
-          description: Invalid Fields
+          description: Invalid Fields        
+        404:
+          description: Unknown transaction ID
         500:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/TransactionDetails'
-    put:
+    patch:
       summary: Mettre à jour une transaction
       operationId: updateTransaction
       parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
         - name: transactionId
           in: path
           required: true
